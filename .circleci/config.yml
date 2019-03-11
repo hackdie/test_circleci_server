@@ -21,9 +21,9 @@ jobs:
           name: "Deploy"
           command: |
             docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-            docker build --build-arg --quiet=false -t "hackdie/testing-docker:0.0.6" -f ./Dockerfile .
-            docker tag "hackdie/testing-docker:0.0.6" "hackdie/testing-docker:latest"
-            docker push hackdie/testing-docker:0.0.6
+            docker build --build-arg --quiet=false -t "hackdie/testing-docker:0.0.7" -f ./Dockerfile .
+            docker tag "hackdie/testing-docker:0.0.7" "hackdie/testing-docker:latest"
+            docker push hackdie/testing-docker:0.0.7
             docker push hackdie/testing-docker:latest
 
 workflows:
