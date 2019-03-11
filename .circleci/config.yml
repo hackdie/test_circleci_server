@@ -24,10 +24,10 @@ jobs:
             command: |
                   echo "export COMMIT_MESSAGE=\"$(git log --format=oneline -n 1 $CIRCLE_SHA1)\"" >> $BASH_ENV
       - run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-      - run: docker build --build-arg --quiet=false -t "hackdie/testing-docker:$COMMIT_MESSAGE" -f ./Dockerfile .
-      - run: docker tag "hackdie/testing-docker:$COMMIT_MESSAGE" "hackdie/testing-docker:latest"
-      - run: docker push hackdie/testing-docker:$COMMIT_MESSAGE
-      - run: sudo pip install awscli --upgrade
+      - run: docker build --build-arg --quiet=false -t "hackdie/testing-docker:0.0.5" -f ./Dockerfile .
+      - run: docker tag "hackdie/testing-docker:0.0.5" "hackdie/testing-docker:latest"
+      - run: docker push hackdie/testing-docker:0.0.5
+      # - run: sudo pip install awscli --upgrade
       - run: docker push hackdie/testing-docker:latest
 
 workflows:
