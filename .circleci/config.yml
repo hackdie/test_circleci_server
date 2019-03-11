@@ -6,6 +6,8 @@ jobs:
     working_directory: ~/app
     steps:
       - checkout
+      - setup_remote_docker: # (2)
+          docker_layer_caching: true # (3)
       - restore_cache: # special step to restore the dependency cache
           key: dependency-cache-{{ checksum "package.json" }}
       - run:
@@ -15,13 +17,14 @@ jobs:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
             - ./node_modules
-      - run: sudo docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-      - setup_remote_docker: # (2)
-          docker_layer_caching: true # (3)
-      - run: sudo docker build --build-arg --quiet=false -t "hackdie/testing-docker:0.0.6" -f ./Dockerfile .
-      - run: sudo docker tag "hackdie/testing-docker:0.0.6" "hackdie/testing-docker:latest"
-      - run: sudo docker push hackdie/testing-docker:0.0.6
-      - run: sudo docker push hackdie/testing-docker:latest
+      - run:
+          name: "Deploy"
+          command: |
+            docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+            docker build --build-arg --quiet=false -t "hackdie/testing-docker:0.0.6" -f ./Dockerfile .
+            docker tag "hackdie/testing-docker:0.0.6" "hackdie/testing-docker:latest"
+            docker push hackdie/testing-docker:0.0.6
+            docker push hackdie/testing-docker:latest
 
 workflows:
   version: 2
