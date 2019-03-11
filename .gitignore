@@ -1,0 +1,11 @@
+.env
+.nyc_output/
+coverage/
+dist/
+node_modules/
+scripts/dynamodb/*.json
+scripts/tmp-*
+.DS_Store
+yarn-error.log
+scripts/state/*
+.rgignore
