@@ -19,16 +19,15 @@ jobs:
       #     name: Run Test and Coverage
       #     command: |
       #       npm run build
-      - run:
-            name: Set PLEO_ENVIRONMENT
-            command: |
-                  echo "export COMMIT_MESSAGE=\"$(git log --format=oneline -n 1 $CIRCLE_SHA1)\"" >> $BASH_ENV
-      - run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-      - run: docker build --build-arg --quiet=false -t "hackdie/testing-docker:0.0.5" -f ./Dockerfile .
-      - run: docker tag "hackdie/testing-docker:0.0.5" "hackdie/testing-docker:latest"
-      - run: docker push hackdie/testing-docker:0.0.5
-      # - run: sudo pip install awscli --upgrade
-      - run: docker push hackdie/testing-docker:latest
+      # - run:
+      #       name: Set PLEO_ENVIRONMENT
+      #       command: |
+      #             echo "export COMMIT_MESSAGE=\"$(git log --format=oneline -n 1 $CIRCLE_SHA1)\"" >> $BASH_ENV
+      - run: sudo docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+      - run: sudo docker build --build-arg --quiet=false -t "hackdie/testing-docker:0.0.6" -f ./Dockerfile .
+      - run: sudo docker tag "hackdie/testing-docker:0.0.6" "hackdie/testing-docker:latest"
+      - run: sudo docker push hackdie/testing-docker:0.0.6
+      - run: sudo docker push hackdie/testing-docker:latest
 
 workflows:
   version: 2
