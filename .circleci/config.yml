@@ -20,13 +20,14 @@ jobs:
       - run:
           name: "Deploy"
           command: |
-            docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-            docker build --build-arg --quiet=false -t "hackdie/testing-docker:0.0.9" -f ./Dockerfile .
-            docker tag "hackdie/testing-docker:0.0.9" "hackdie/testing-docker:latest"
-            docker push hackdie/testing-docker:0.0.9
-            docker push hackdie/testing-docker:latest
+            # docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+            # docker build --build-arg --quiet=false -t "hackdie/testing-docker:0.0.9" -f ./Dockerfile .
+            # docker tag "hackdie/testing-docker:0.0.9" "hackdie/testing-docker:latest"
+            # docker push hackdie/testing-docker:0.0.9
+            # docker push hackdie/testing-docker:latest
+            sudo apt-get install python3-pip
             pip install ecs-deploy
-            ecs deploy my-cluster my-service --region $REGION --access-key-id $AWS_ACCESS_KEY --secret-access-key $AWS_SECRET_ACCESS
+            ecs deploy hackdie-cluster hackdie-ci-test-service --tag 0.0.9 --region $REGION --access-key-id $AWS_ACCESS_KEY --secret-access-key $AWS_SECRET_ACCESS
 
 workflows:
   version: 2
