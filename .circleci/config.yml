@@ -21,10 +21,12 @@ jobs:
           name: "Deploy"
           command: |
             docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-            docker build --build-arg --quiet=false -t "hackdie/testing-docker:0.0.7" -f ./Dockerfile .
-            docker tag "hackdie/testing-docker:0.0.7" "hackdie/testing-docker:latest"
-            docker push hackdie/testing-docker:0.0.7
+            docker build --build-arg --quiet=false -t "hackdie/testing-docker:0.0.9" -f ./Dockerfile .
+            docker tag "hackdie/testing-docker:0.0.9" "hackdie/testing-docker:latest"
+            docker push hackdie/testing-docker:0.0.9
             docker push hackdie/testing-docker:latest
+            pip install ecs-deploy
+            ecs deploy my-cluster my-service --region $REGION --access-key-id $AWS_ACCESS_KEY --secret-access-key $AWS_SECRET_ACCESS
 
 workflows:
   version: 2

@@ -50,3 +50,6 @@ const server = new ApolloServer({ typeDefs, resolvers });
 server.listen().then(({ url }) => {
   console.log(`🚀  Server ready at hackdie ${url}`);
 });
+
+console.log('Test:::::1')
+console.log('Test:::::2')
