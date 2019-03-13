@@ -25,12 +25,13 @@ jobs:
             # docker tag "hackdie/testing-docker:0.0.9" "hackdie/testing-docker:latest"
             # docker push hackdie/testing-docker:0.0.9
             # docker push hackdie/testing-docker:latest
-            sudo apt-get -y -qq update
-            sudo apt-get install python-pip python-dev build-essential
-            # sudo pip install --upgrade awsebcli
-            # sudo apt-get install python3-pip
-            sudo pip install ecs-deploy
-            ecs deploy hackdie-cluster hackdie-ci-test-service --tag 0.0.9 --region $REGION --access-key-id $AWS_ACCESS_KEY --secret-access-key $AWS_SECRET_ACCESS
+
+            echo date
+
+            # sudo apt-get -y -qq update
+            # sudo apt-get install python-pip python-dev build-essential
+            # sudo pip install ecs-deploy
+            # ecs deploy hackdie-cluster hackdie-ci-test-service --tag 0.0.9 --region $REGION --access-key-id $AWS_ACCESS_KEY --secret-access-key $AWS_SECRET_ACCESS
 
 workflows:
   version: 2
